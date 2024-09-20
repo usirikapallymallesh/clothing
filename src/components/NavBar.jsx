@@ -7,28 +7,18 @@ import { RiArrowLeftWideFill } from "react-icons/ri";
 import { assets } from "../assets/frontend_assets/assets";
 import { shopContext } from "../context/ShopContext";
 import { useContext } from "react";
-import { useGSAP } from "@gsap/react";
+// import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { useEffect } from "react";
 
-import Lottie from "lottie-react";
-import loader from "../animations/everyPageLoader";
+
 
 const NavBar = () => {
   const [visible, setVisible] = useState(false);
   const { setShowSearch, getCartCount } = useContext(shopContext);
-  const [loading, setLoading] = useState(true);
 
   const handleClick = () => {
     setVisible(false);
-    handleLoading();
-  };
-
-  const handleLoading = () => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 700);
   };
 
   const animationMenu = useRef([]);
@@ -67,7 +57,6 @@ const NavBar = () => {
   };
 
   useEffect(() => {
-    handleLoading();
     gsap.from(animationMenu.current, {
       duration: 1,
       opacity: 0,
@@ -79,20 +68,7 @@ const NavBar = () => {
 
   return (
     <div className="flex items-center justify-between border-box  py-5 font-medium  box-border	">
-      <div
-        className={`${
-          loading ? "block" : "hidden"
-        }  flex items-center absolute top-[0%] left-0  h-[100vh] w-[100vw] justify-center bg-[#969fd7]  z-20`}
-      >
-        <div>
-          <Lottie
-            animationData={loader}
-            loop={true}
-            className="w-30 h-[500px] sm:h-[200px] md:h-[400px]"
-          />
-        </div>
-      </div>
-      <Link to={"/"} onClick={handleLoading}>
+      <Link to={"/"}>
         {" "}
         <img
           src={assets.logo}
@@ -106,7 +82,6 @@ const NavBar = () => {
         <NavLink
           to="/"
           className="flex flex-col items-center gap-1"
-          onClick={handleLoading}
           ref={addToRefs}
         >
           Home
@@ -116,7 +91,6 @@ const NavBar = () => {
         <NavLink
           to="/collection"
           className="flex flex-col items-center gap-1"
-          onClick={handleLoading}
           ref={addToRefs}
         >
           Collections
@@ -126,7 +100,6 @@ const NavBar = () => {
         <NavLink
           to="/about"
           className="flex flex-col items-center gap-1"
-          onClick={handleLoading}
           ref={addToRefs}
         >
           About Us
@@ -136,7 +109,6 @@ const NavBar = () => {
         <NavLink
           to="/contact"
           className="flex flex-col items-center gap-1"
-          onClick={handleLoading}
           ref={addToRefs}
         >
           Contact Us
